@@ -1,0 +1,624 @@
+[
+  {
+    "id": "general",
+    "name": "All industries",
+    "voice": "Clear, confident and friendly.",
+    "palettes": [
+      [
+        "#E4572E",
+        "#29335C",
+        "#F3A712"
+      ],
+      [
+        "#2B2D42",
+        "#8D99AE",
+        "#EF233C"
+      ]
+    ],
+    "copy": {
+      "headline": "{name}, made with care",
+      "subheadline": "Quality you can see. Service you can feel.",
+      "about": "{name} exists to make everyday life a little better through thoughtful work and honest service.",
+      "mission": "To deliver work we are proud of, for people we are proud to serve.",
+      "values": [
+        "Quality",
+        "Honesty",
+        "Care",
+        "Simplicity"
+      ],
+      "cta": "Get in touch",
+      "slides": [
+        {
+          "title": "Meet {name}",
+          "body": "Here is what we do and why we do it."
+        },
+        {
+          "title": "What we believe",
+          "body": "Quality, honesty and care in everything."
+        },
+        {
+          "title": "How we help",
+          "body": "We make the complicated simple."
+        },
+        {
+          "title": "Why people choose us",
+          "body": "Reliable, personal and proud of our work."
+        },
+        {
+          "title": "Let's talk",
+          "body": "Get in touch today."
+        }
+      ]
+    }
+  },
+  {
+    "id": "restaurant",
+    "name": "Restaurant & Food",
+    "voice": "Warm, appetising and inviting, with sensory words.",
+    "palettes": [
+      [
+        "#C8553D",
+        "#2D3047",
+        "#F2D0A4"
+      ],
+      [
+        "#6A994E",
+        "#386641",
+        "#F2E8CF"
+      ],
+      [
+        "#9E2A2B",
+        "#540B0E",
+        "#E09F3E"
+      ]
+    ],
+    "copy": {
+      "headline": "Good food. Good people. {name}.",
+      "subheadline": "Fresh ingredients, cooked with love.",
+      "about": "{name} brings people together around honest, seasonal food made from scratch every day.",
+      "mission": "To make every meal feel like a small celebration.",
+      "values": [
+        "Fresh",
+        "Generous",
+        "Welcoming",
+        "Local"
+      ],
+      "cta": "Book a table",
+      "slides": [
+        {
+          "title": "Welcome to {name}",
+          "body": "Pull up a chair - you're among friends."
+        },
+        {
+          "title": "Fresh every day",
+          "body": "Seasonal ingredients from local suppliers."
+        },
+        {
+          "title": "Made from scratch",
+          "body": "Every sauce, every loaf, every dessert."
+        },
+        {
+          "title": "Made for sharing",
+          "body": "Big plates, long tables, good times."
+        },
+        {
+          "title": "Book your table",
+          "body": "We'll save you a seat."
+        }
+      ]
+    }
+  },
+  {
+    "id": "tech",
+    "name": "Tech & SaaS",
+    "voice": "Clear, precise and optimistic. Short sentences, no jargon.",
+    "palettes": [
+      [
+        "#3A86FF",
+        "#0B132B",
+        "#00F5D4"
+      ],
+      [
+        "#7209B7",
+        "#14213D",
+        "#4CC9F0"
+      ],
+      [
+        "#06D6A0",
+        "#073B4C",
+        "#118AB2"
+      ]
+    ],
+    "copy": {
+      "headline": "{name}: work, simplified",
+      "subheadline": "The tool your team will actually enjoy using.",
+      "about": "{name} helps teams do their best work by removing busywork and bringing everything into one place.",
+      "mission": "To give people back their time.",
+      "values": [
+        "Simplicity",
+        "Speed",
+        "Trust",
+        "Craft"
+      ],
+      "cta": "Start free",
+      "slides": [
+        {
+          "title": "Meet {name}",
+          "body": "Less busywork. More real work."
+        },
+        {
+          "title": "Everything in one place",
+          "body": "No more switching between ten tabs."
+        },
+        {
+          "title": "Set up in minutes",
+          "body": "No training, no consultants."
+        },
+        {
+          "title": "Secure by default",
+          "body": "Your data stays yours."
+        },
+        {
+          "title": "Try it free",
+          "body": "Start today - no card needed."
+        }
+      ]
+    }
+  },
+  {
+    "id": "fashion",
+    "name": "Fashion & Beauty",
+    "voice": "Elegant, expressive and confident.",
+    "palettes": [
+      [
+        "#111111",
+        "#F5F0E6",
+        "#C9A227"
+      ],
+      [
+        "#E0AFA0",
+        "#463F3A",
+        "#F4F3EE"
+      ],
+      [
+        "#B5838D",
+        "#6D6875",
+        "#FFCDB2"
+      ]
+    ],
+    "copy": {
+      "headline": "{name}. Wear your story.",
+      "subheadline": "Timeless pieces for modern lives.",
+      "about": "{name} designs considered pieces that feel as good as they look, made to be loved for years.",
+      "mission": "To help everyone feel confident in their own skin.",
+      "values": [
+        "Craft",
+        "Confidence",
+        "Sustainability",
+        "Individuality"
+      ],
+      "cta": "Shop the collection",
+      "slides": [
+        {
+          "title": "The new collection",
+          "body": "Designed in-house. Made to last."
+        },
+        {
+          "title": "Crafted with care",
+          "body": "Responsibly sourced materials."
+        },
+        {
+          "title": "Made for you",
+          "body": "Pieces that move with your life."
+        },
+        {
+          "title": "Style it your way",
+          "body": "Mix, match, make it yours."
+        },
+        {
+          "title": "Shop now",
+          "body": "Find your new favourite."
+        }
+      ]
+    }
+  },
+  {
+    "id": "real-estate",
+    "name": "Real Estate",
+    "voice": "Trustworthy, calm and professional.",
+    "palettes": [
+      [
+        "#1D3557",
+        "#457B9D",
+        "#E63946"
+      ],
+      [
+        "#283618",
+        "#606C38",
+        "#DDA15E"
+      ],
+      [
+        "#0F4C5C",
+        "#5F0F40",
+        "#E36414"
+      ]
+    ],
+    "copy": {
+      "headline": "Find your place with {name}",
+      "subheadline": "Local experts. Honest advice. Great homes.",
+      "about": "{name} helps people buy, sell and rent with clear advice and genuine local knowledge.",
+      "mission": "To make every move simple and stress-free.",
+      "values": [
+        "Integrity",
+        "Local knowledge",
+        "Clarity",
+        "Care"
+      ],
+      "cta": "Book a valuation",
+      "slides": [
+        {
+          "title": "Thinking of moving?",
+          "body": "Here's how {name} makes it easy."
+        },
+        {
+          "title": "Know your home's value",
+          "body": "Free, honest valuations."
+        },
+        {
+          "title": "Local experts",
+          "body": "We know every street."
+        },
+        {
+          "title": "With you all the way",
+          "body": "From first viewing to keys in hand."
+        },
+        {
+          "title": "Let's talk",
+          "body": "Book your free valuation today."
+        }
+      ]
+    }
+  },
+  {
+    "id": "health",
+    "name": "Health & Wellness",
+    "voice": "Caring, reassuring and calm.",
+    "palettes": [
+      [
+        "#2A9D8F",
+        "#264653",
+        "#E9C46A"
+      ],
+      [
+        "#84A59D",
+        "#2F3E46",
+        "#F6BD60"
+      ],
+      [
+        "#5E60CE",
+        "#1B263B",
+        "#80FFDB"
+      ]
+    ],
+    "copy": {
+      "headline": "Feel better with {name}",
+      "subheadline": "Care that puts you first.",
+      "about": "{name} offers personal, evidence-based care to help people live healthier, happier lives.",
+      "mission": "To make good health feel achievable for everyone.",
+      "values": [
+        "Compassion",
+        "Expertise",
+        "Balance",
+        "Trust"
+      ],
+      "cta": "Book an appointment",
+      "slides": [
+        {
+          "title": "Your health, your way",
+          "body": "Personal care from {name}."
+        },
+        {
+          "title": "Experts who listen",
+          "body": "We take time to understand you."
+        },
+        {
+          "title": "Evidence-based care",
+          "body": "Treatments that work."
+        },
+        {
+          "title": "Small steps, big change",
+          "body": "We support you every day."
+        },
+        {
+          "title": "Book today",
+          "body": "Your first step starts here."
+        }
+      ]
+    }
+  },
+  {
+    "id": "fitness",
+    "name": "Fitness & Sport",
+    "voice": "Energetic, motivating and direct.",
+    "palettes": [
+      [
+        "#FF006E",
+        "#111111",
+        "#FFBE0B"
+      ],
+      [
+        "#FB5607",
+        "#1B1B1E",
+        "#3A86FF"
+      ],
+      [
+        "#38B000",
+        "#0B090A",
+        "#F5F3F4"
+      ]
+    ],
+    "copy": {
+      "headline": "Stronger every day at {name}",
+      "subheadline": "Train hard. Feel unstoppable.",
+      "about": "{name} is a community that pushes you further, with coaching that fits your goals.",
+      "mission": "To help everyone discover what they're capable of.",
+      "values": [
+        "Grit",
+        "Community",
+        "Progress",
+        "Fun"
+      ],
+      "cta": "Claim your free session",
+      "slides": [
+        {
+          "title": "Ready to start?",
+          "body": "{name} is where it happens."
+        },
+        {
+          "title": "Expert coaching",
+          "body": "Programmes built around you."
+        },
+        {
+          "title": "Real community",
+          "body": "Train with people who've got your back."
+        },
+        {
+          "title": "See real results",
+          "body": "Track your progress every week."
+        },
+        {
+          "title": "Your first session's on us",
+          "body": "Claim it today."
+        }
+      ]
+    }
+  },
+  {
+    "id": "finance",
+    "name": "Finance & Legal",
+    "voice": "Authoritative, precise and reassuring.",
+    "palettes": [
+      [
+        "#14213D",
+        "#FCA311",
+        "#E5E5E5"
+      ],
+      [
+        "#003049",
+        "#669BBC",
+        "#C1121F"
+      ],
+      [
+        "#1B4332",
+        "#40916C",
+        "#D8F3DC"
+      ]
+    ],
+    "copy": {
+      "headline": "{name}: advice you can count on",
+      "subheadline": "Clear guidance for important decisions.",
+      "about": "{name} gives individuals and businesses straightforward, expert advice they can act on with confidence.",
+      "mission": "To make complex decisions clear.",
+      "values": [
+        "Integrity",
+        "Precision",
+        "Discretion",
+        "Clarity"
+      ],
+      "cta": "Book a consultation",
+      "slides": [
+        {
+          "title": "Big decisions, made clear",
+          "body": "Expert advice from {name}."
+        },
+        {
+          "title": "No jargon",
+          "body": "Plain answers to complex questions."
+        },
+        {
+          "title": "Proven expertise",
+          "body": "Years of experience on your side."
+        },
+        {
+          "title": "Confidential and personal",
+          "body": "Advice built around you."
+        },
+        {
+          "title": "Let's talk",
+          "body": "Book your consultation."
+        }
+      ]
+    }
+  },
+  {
+    "id": "education",
+    "name": "Education",
+    "voice": "Encouraging, clear and curious.",
+    "palettes": [
+      [
+        "#4361EE",
+        "#3A0CA3",
+        "#F72585"
+      ],
+      [
+        "#FFB703",
+        "#023047",
+        "#219EBC"
+      ],
+      [
+        "#2EC4B6",
+        "#011627",
+        "#FF9F1C"
+      ]
+    ],
+    "copy": {
+      "headline": "Learn more with {name}",
+      "subheadline": "Where curiosity becomes confidence.",
+      "about": "{name} helps learners of every age build skills and confidence through engaging, expert teaching.",
+      "mission": "To make great learning available to everyone.",
+      "values": [
+        "Curiosity",
+        "Inclusion",
+        "Excellence",
+        "Growth"
+      ],
+      "cta": "Enrol now",
+      "slides": [
+        {
+          "title": "Learning that sticks",
+          "body": "Discover {name}."
+        },
+        {
+          "title": "Expert teachers",
+          "body": "Passionate about helping you grow."
+        },
+        {
+          "title": "Learn your way",
+          "body": "Flexible courses that fit your life."
+        },
+        {
+          "title": "Real results",
+          "body": "Skills you'll use for life."
+        },
+        {
+          "title": "Start learning",
+          "body": "Enrol today."
+        }
+      ]
+    }
+  },
+  {
+    "id": "retail",
+    "name": "Retail & E-commerce",
+    "voice": "Friendly, upbeat and helpful.",
+    "palettes": [
+      [
+        "#EF476F",
+        "#073B4C",
+        "#FFD166"
+      ],
+      [
+        "#F15BB5",
+        "#00BBF9",
+        "#FEE440"
+      ],
+      [
+        "#E76F51",
+        "#264653",
+        "#E9C46A"
+      ]
+    ],
+    "copy": {
+      "headline": "Discover {name}",
+      "subheadline": "Things you'll love, delivered to your door.",
+      "about": "{name} curates products that make everyday life better, with service that puts customers first.",
+      "mission": "To make shopping easy and joyful.",
+      "values": [
+        "Quality",
+        "Value",
+        "Delight",
+        "Service"
+      ],
+      "cta": "Shop now",
+      "slides": [
+        {
+          "title": "New in at {name}",
+          "body": "Fresh picks you'll love."
+        },
+        {
+          "title": "Quality you can trust",
+          "body": "Every product hand-picked."
+        },
+        {
+          "title": "Fast, free delivery",
+          "body": "Straight to your door."
+        },
+        {
+          "title": "Loved by customers",
+          "body": "See why people keep coming back."
+        },
+        {
+          "title": "Shop the range",
+          "body": "Find something you'll love."
+        }
+      ]
+    }
+  },
+  {
+    "id": "creative",
+    "name": "Creative & Agency",
+    "voice": "Bold, witty and confident.",
+    "palettes": [
+      [
+        "#FF5400",
+        "#0D0D0D",
+        "#FFFFFF"
+      ],
+      [
+        "#8338EC",
+        "#FF006E",
+        "#FFBE0B"
+      ],
+      [
+        "#F4F1DE",
+        "#3D405B",
+        "#E07A5F"
+      ]
+    ],
+    "copy": {
+      "headline": "{name}. Ideas that move people.",
+      "subheadline": "Strategy, design and stories that stand out.",
+      "about": "{name} is a creative studio helping ambitious brands find their voice and be remembered.",
+      "mission": "To make brands impossible to ignore.",
+      "values": [
+        "Bold",
+        "Curious",
+        "Crafted",
+        "Collaborative"
+      ],
+      "cta": "Start a project",
+      "slides": [
+        {
+          "title": "Hello, we're {name}",
+          "body": "A studio for ambitious brands."
+        },
+        {
+          "title": "Strategy first",
+          "body": "Every idea starts with insight."
+        },
+        {
+          "title": "Design that works",
+          "body": "Beautiful and built to perform."
+        },
+        {
+          "title": "Stories people share",
+          "body": "Content with a point of view."
+        },
+        {
+          "title": "Let's make something",
+          "body": "Start a project with us."
+        }
+      ]
+    }
+  }
+]

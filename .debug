@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionList>
+    <Extension Id="com.portablestudio.panel">
+        <HostList>
+            <Host Name="ILST" Port="8088" />
+            <Host Name="PHXS" Port="8089" />
+            <Host Name="PHSP" Port="8090" />
+        </HostList>
+    </Extension>
+</ExtensionList>

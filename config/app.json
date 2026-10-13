@@ -1,0 +1,13 @@
+{
+  "productName": "PortableStudio",
+  "purchaseUrl": "",
+  "supportUrl": "",
+  "licensing": {
+    "enabled": false,
+    "provider": "lemonsqueezy",
+    "storeId": null,
+    "productId": null,
+    "revalidateDays": 7,
+    "graceDays": 14
+  }
+}

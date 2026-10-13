@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="210 50 420 100" width="420" height="100">
+  <g fill="#1F3A5F">
+    <path d="M222 60 h22 v62 h40 v18 h-62 Z"/>
+    <path d="M296 60 h22 v50 c0 10 6 15 16 15 c10 0 16 -5 16 -15 v-50 h22 v52 c0 20 -14 31 -38 31 c-24 0 -38 -11 -38 -31 Z"/>
+    <path d="M386 140 v-80 h24 l20 46 l20 -46 h24 v80 h-21 v-46 l-16 38 h-14 l-16 -38 v46 Z"/>
+    <path d="M488 60 h56 v17 h-34 v14 h30 v16 h-30 v16 h35 v17 h-57 Z"/>
+    <path d="M556 140 v-80 h21 l28 46 v-46 h21 v80 h-20 l-29 -47 v47 Z" transform="translate(-6 0)"/>
+  </g>
+</svg>

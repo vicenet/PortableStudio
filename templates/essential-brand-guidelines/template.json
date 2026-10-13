@@ -1,0 +1,63 @@
+{
+  "id": "essential-brand-guidelines",
+  "name": "Essential Brand Guidelines",
+  "app": "illustrator",
+  "category": "brand-guidelines",
+  "industries": [
+    "general"
+  ],
+  "description": "Brand guidelines: overview, logo, construction, colour, typography, graphics, stationery, photography and applications.",
+  "file": "template.ai",
+  "thumbnail": "thumbnail.png",
+  "pages": 43,
+  "size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "tags": [
+    "year",
+    "designer.name",
+    "designer.email",
+    "brand.website",
+    "copy.values",
+    "font.body",
+    "font.heading",
+    "brand.name",
+    "copy.cta",
+    "copy.subheadline",
+    "copy.headline",
+    "copy.mission",
+    "copy.about",
+    "color.accent.cmyk",
+    "color.accent.rgb",
+    "color.accent.hex",
+    "color.secondary.cmyk",
+    "color.secondary.rgb",
+    "color.secondary.hex",
+    "color.primary.cmyk",
+    "color.primary.rgb",
+    "color.primary.hex",
+    "copy.voice",
+    "copy.value4",
+    "copy.value3",
+    "copy.value2",
+    "copy.value1",
+    "logo.mark",
+    "logo.full",
+    "image.photo4",
+    "image.photo3",
+    "image.photo2",
+    "image.photo1",
+    "logo.type",
+    "color.primary",
+    "color.secondary",
+    "color.accent"
+  ],
+  "fontRoles": [
+    "heading",
+    "body"
+  ],
+  "author": "PortableStudio",
+  "version": 1,
+  "created": "2026-10-13"
+}

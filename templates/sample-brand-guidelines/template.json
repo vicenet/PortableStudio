@@ -1,0 +1,47 @@
+{
+  "id": "sample-brand-guidelines",
+  "name": "Sample Brand Guidelines",
+  "app": "illustrator",
+  "category": "brand-guidelines",
+  "industries": [
+    "general"
+  ],
+  "description": "3-page tagged example.",
+  "file": "template.ai",
+  "thumbnail": "thumbnail.png",
+  "pages": 3,
+  "size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "tags": [
+    "designer.name",
+    "designer.email",
+    "date",
+    "font.body",
+    "font.heading",
+    "color.accent.cmyk",
+    "color.accent.rgb",
+    "color.accent.hex",
+    "color.secondary.cmyk",
+    "color.secondary.rgb",
+    "color.secondary.hex",
+    "color.primary.cmyk",
+    "color.primary.rgb",
+    "color.primary.hex",
+    "brand.tagline",
+    "brand.name",
+    "logo.mark",
+    "logo.full",
+    "color.primary",
+    "color.secondary",
+    "color.accent"
+  ],
+  "fontRoles": [
+    "heading",
+    "body"
+  ],
+  "author": "",
+  "version": 1,
+  "created": "2026-10-13"
+}

@@ -1,0 +1,52 @@
+{
+  "id": "logo-presentation",
+  "name": "Logo Presentation",
+  "app": "illustrator",
+  "category": "logo-presentation",
+  "industries": [
+    "general"
+  ],
+  "description": "12-page logo presentation: idea, symbol, construction, colour versions, palette and the logo in use.",
+  "file": "template.ai",
+  "thumbnail": "thumbnail.png",
+  "pages": 12,
+  "size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "tags": [
+    "designer.name",
+    "designer.email",
+    "brand.name",
+    "copy.about",
+    "font.heading",
+    "font.body",
+    "copy.cta",
+    "copy.subheadline",
+    "copy.headline",
+    "brand.website",
+    "color.accent.cmyk",
+    "color.accent.rgb",
+    "color.accent.hex",
+    "color.secondary.cmyk",
+    "color.secondary.rgb",
+    "color.secondary.hex",
+    "color.primary.cmyk",
+    "color.primary.rgb",
+    "color.primary.hex",
+    "copy.mission",
+    "date",
+    "logo.mark",
+    "logo.full",
+    "color.primary",
+    "color.secondary",
+    "color.accent"
+  ],
+  "fontRoles": [
+    "heading",
+    "body"
+  ],
+  "author": "PortableStudio",
+  "version": 1,
+  "created": "2026-10-13"
+}

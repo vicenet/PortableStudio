@@ -1,0 +1,22 @@
+{
+  "name": "Lumen Coffee",
+  "tagline": "Small batch. Big mornings.",
+  "industry": "restaurant",
+  "website": "lumen.coffee",
+  "designerName": "",
+  "designerEmail": "",
+  "colors": {
+    "primary": "#1F3A5F",
+    "secondary": "#3E5C76",
+    "accent": "#F2A541"
+  },
+  "logos": {
+    "mark": "lumen-mark.svg",
+    "full": "lumen-full.svg",
+    "type": "lumen-type.svg",
+    "fullWhite": "lumen-full-white.svg",
+    "markWhite": "lumen-mark-white.svg",
+    "fullBlack": "lumen-full-black.svg",
+    "markBlack": "lumen-mark-black.svg"
+  }
+}

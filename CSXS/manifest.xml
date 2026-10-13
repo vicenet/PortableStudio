@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionManifest Version="7.0" ExtensionBundleId="com.portablestudio" ExtensionBundleVersion="0.3.0"
+    ExtensionBundleName="PortableStudio" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <ExtensionList>
+        <Extension Id="com.portablestudio.panel" Version="0.3.0" />
+    </ExtensionList>
+    <ExecutionEnvironment>
+        <HostList>
+            <Host Name="ILST" Version="[25.0,99.9]" />
+            <Host Name="PHXS" Version="[22.0,99.9]" />
+            <Host Name="PHSP" Version="[22.0,99.9]" />
+        </HostList>
+        <LocaleList>
+            <Locale Code="All" />
+        </LocaleList>
+        <RequiredRuntimeList>
+            <RequiredRuntime Name="CSXS" Version="11.0" />
+        </RequiredRuntimeList>
+    </ExecutionEnvironment>
+    <DispatchInfoList>
+        <Extension Id="com.portablestudio.panel">
+            <DispatchInfo>
+                <Resources>
+                    <MainPath>./index.html</MainPath>
+                    <CEFCommandLine>
+                        <Parameter>--enable-nodejs</Parameter>
+                        <Parameter>--mixed-context</Parameter>
+                    </CEFCommandLine>
+                </Resources>
+                <Lifecycle>
+                    <AutoVisible>true</AutoVisible>
+                </Lifecycle>
+                <UI>
+                    <Type>Panel</Type>
+                    <Menu>PortableStudio</Menu>
+                    <Geometry>
+                        <Size>
+                            <Width>380</Width>
+                            <Height>760</Height>
+                        </Size>
+                        <MinSize>
+                            <Width>320</Width>
+                            <Height>300</Height>
+                        </MinSize>
+                        <MaxSize>
+                            <Width>800</Width>
+                            <Height>2000</Height>
+                        </MaxSize>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+    </DispatchInfoList>
+</ExtensionManifest>

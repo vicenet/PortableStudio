@@ -1,0 +1,43 @@
+{
+  "id": "instagram-carousel",
+  "name": "Instagram Carousel",
+  "app": "illustrator",
+  "category": "social-carousel",
+  "industries": [
+    "general"
+  ],
+  "description": "5-slide 1080x1350 carousel filled from the brand copy slides. Exports one PNG per slide.",
+  "file": "template.ai",
+  "thumbnail": "thumbnail.png",
+  "pages": 5,
+  "size": {
+    "width": 1080,
+    "height": 1350
+  },
+  "tags": [
+    "brand.website",
+    "copy.cta",
+    "copy.slide5.title",
+    "copy.slide5.body",
+    "copy.slide4.title",
+    "copy.slide4.body",
+    "copy.slide3.title",
+    "copy.slide3.body",
+    "copy.slide2.title",
+    "copy.slide2.body",
+    "copy.slide1.title",
+    "copy.slide1.body",
+    "logo.full",
+    "logo.mark",
+    "color.primary",
+    "color.secondary",
+    "color.accent"
+  ],
+  "fontRoles": [
+    "heading",
+    "body"
+  ],
+  "author": "PortableStudio",
+  "version": 1,
+  "created": "2026-10-13"
+}

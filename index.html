@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PortableStudio</title>
+  <link rel="stylesheet" href="css/panel.css">
+</head>
+<body>
+  <header class="top">
+    <strong>PortableStudio</strong>
+    <span id="hostBadge" class="badge">loading…</span>
+  </header>
+
+  <nav class="tabs">
+    <button type="button" data-tab="create" class="active">Create</button>
+    <button type="button" data-tab="kit">Kit</button>
+    <button type="button" data-tab="templates">Templates</button>
+    <button type="button" data-tab="settings">Settings</button>
+  </nav>
+
+  <div id="fatal" class="notice error" hidden></div>
+  <div id="licenseNotice" class="notice warn" hidden></div>
+
+  <!-- ============ CREATE ============ -->
+  <section id="tab-create" class="tab active">
+    <div class="card welcome" id="welcome" hidden>
+      <div class="card-title">Welcome to PortableStudio <button type="button" id="welcomeClose" class="link">Dismiss</button></div>
+      <ol class="steps">
+        <li>Fill in a brand below, or <button type="button" id="loadSample" class="link">load the sample brand</button>.</li>
+        <li>Pick one or more templates at the bottom of this tab.</li>
+        <li>Click <b>Generate</b>. The editable file opens in Illustrator, with a PDF next to it.</li>
+      </ol>
+      <p class="hint">Need templates? Go to <b>Templates</b> to create a sample, add your own design or install a pack.</p>
+    </div>
+    <div class="card brandbar">
+      <select id="brandSelect" title="Saved brands"></select>
+      <button type="button" id="brandSave" class="primary">Save</button>
+      <button type="button" id="brandDelete" title="Delete this saved brand">Delete</button>
+    </div>
+
+    <details class="card" open>
+      <summary>Brand</summary>
+      <label>Brand name <input data-field="name" placeholder="e.g. Saffron Kitchen"></label>
+      <label>Tagline <input data-field="tagline" placeholder="Optional"></label>
+      <label>Industry <select data-field="industry" id="industrySelect"></select></label>
+      <label>Website <input data-field="website" placeholder="Optional"></label>
+      <div class="row">
+        <label>Designer <input data-field="designerName"></label>
+        <label>Email <input data-field="designerEmail" type="email"></label>
+      </div>
+    </details>
+
+    <details class="card" open>
+      <summary>Colours</summary>
+      <div class="swatches">
+        <label class="swatch"><input type="color" data-color="primary"><span>Primary</span><input class="hex" data-hex="primary" maxlength="7"></label>
+        <label class="swatch"><input type="color" data-color="secondary"><span>Secondary</span><input class="hex" data-hex="secondary" maxlength="7"></label>
+        <label class="swatch"><input type="color" data-color="accent"><span>Accent</span><input class="hex" data-hex="accent" maxlength="7"></label>
+      </div>
+      <div class="actions">
+        <button type="button" id="extractColors">From logo</button>
+        <button type="button" id="industryPalette">Industry palette</button>
+      </div>
+      <div id="contrastSummary" class="hint"></div>
+    </details>
+
+    <details class="card" id="fontsCard">
+      <summary>Fonts</summary>
+      <label>Heading</label>
+      <div class="combo"><input data-font="heading" placeholder="Search installed fonts" autocomplete="off"><div class="combo-list" hidden></div></div>
+      <label>Body</label>
+      <div class="combo"><input data-font="body" placeholder="Search installed fonts" autocomplete="off"><div class="combo-list" hidden></div></div>
+      <p class="hint" id="fontStatus">Loading fonts…</p>
+    </details>
+
+    <details class="card" open>
+      <summary>Logos</summary>
+      <div class="file-row" data-logo="mark"><span class="label">Logomark</span><span class="fname"></span><button type="button" class="pick">Choose</button><button type="button" class="clear" title="Remove">×</button></div>
+      <div class="file-row" data-logo="full"><span class="label">Full logo</span><span class="fname"></span><button type="button" class="pick">Choose</button><button type="button" class="clear" title="Remove">×</button></div>
+      <div class="file-row" data-logo="type"><span class="label">Logotype</span><span class="fname"></span><button type="button" class="pick">Choose</button><button type="button" class="clear" title="Remove">×</button></div>
+      <details class="sub">
+        <summary class="hint">One-colour versions (optional, recommended for multi-colour logos)</summary>
+        <div class="file-row" data-logo="fullWhite"><span class="label">Full, white</span><span class="fname"></span><button type="button" class="pick">Choose</button><button type="button" class="clear" title="Remove">×</button></div>
+        <div class="file-row" data-logo="markWhite"><span class="label">Mark, white</span><span class="fname"></span><button type="button" class="pick">Choose</button><button type="button" class="clear" title="Remove">×</button></div>
+        <div class="file-row" data-logo="fullBlack"><span class="label">Full, black</span><span class="fname"></span><button type="button" class="pick">Choose</button><button type="button" class="clear" title="Remove">×</button></div>
+        <div class="file-row" data-logo="markBlack"><span class="label">Mark, black</span><span class="fname"></span><button type="button" class="pick">Choose</button><button type="button" class="clear" title="Remove">×</button></div>
+      </details>
+      <p class="hint">SVG works best in Illustrator (needed for white/black/colour versions). Use PNG or PDF for Photoshop.</p>
+    </details>
+
+    <details class="card">
+      <summary>Photos</summary>
+      <div class="file-row" data-image="photo1"><span class="label">Photo 1</span><span class="fname"></span><button type="button" class="pick">Choose</button><button type="button" class="clear" title="Remove">×</button></div>
+      <div class="file-row" data-image="photo2"><span class="label">Photo 2</span><span class="fname"></span><button type="button" class="pick">Choose</button><button type="button" class="clear" title="Remove">×</button></div>
+      <div class="file-row" data-image="photo3"><span class="label">Photo 3</span><span class="fname"></span><button type="button" class="pick">Choose</button><button type="button" class="clear" title="Remove">×</button></div>
+      <div class="file-row" data-image="photo4"><span class="label">Photo 4</span><span class="fname"></span><button type="button" class="pick">Choose</button><button type="button" class="clear" title="Remove">×</button></div>
+      <p class="hint">Fills {{image.photo1}}–{{image.photo4}} in templates. Photos are cropped to fit their frames.</p>
+    </details>
+
+    <details class="card" id="copyCard">
+      <summary>Brand copy</summary>
+      <label>Brief for AI <textarea id="copyBrief" rows="2" placeholder="Audience, positioning, tone… (optional)"></textarea></label>
+      <div class="actions">
+        <button type="button" id="copyAi" class="primary">Write with AI</button>
+        <button type="button" id="copyIndustry">Use industry copy</button>
+      </div>
+      <label>Headline <input data-copy="headline"></label>
+      <label>Subheadline <input data-copy="subheadline"></label>
+      <label>About <textarea data-copy="about" rows="3"></textarea></label>
+      <label>Mission <textarea data-copy="mission" rows="2"></textarea></label>
+      <label>Tone of voice <textarea data-copy="voice" rows="2"></textarea></label>
+      <label>Call to action <input data-copy="cta"></label>
+      <label>Values <span class="hint">(one per line)</span><textarea data-copy-list="values" rows="3"></textarea></label>
+      <label>Carousel slides <span class="hint">(one per line: Title | Body)</span><textarea data-copy-slides rows="5"></textarea></label>
+    </details>
+
+    <div class="card">
+      <div class="card-title">Templates <button type="button" id="selectAll" class="link">Select all shown</button></div>
+      <div class="row">
+        <select id="t-industry"></select>
+        <select id="t-category"></select>
+      </div>
+      <div id="templateGrid" class="grid"></div>
+      <label class="check"><input type="checkbox" id="exportPages"> Also export each page / slide as PNG</label>
+    </div>
+
+    <button type="button" id="generate" class="primary big" disabled>Generate</button>
+
+    <div class="card" id="updateCard">
+      <div class="card-title">Edit a generated document</div>
+      <p class="hint">Change the brand above (colours, fonts, logos, copy), then apply the changes to the open document.
+        Your manual design edits are kept.</p>
+      <label class="check"><input type="checkbox" id="updateForce"> Also reset text I edited by hand</label>
+      <button type="button" id="updateDoc">Update open document</button>
+    </div>
+    <div id="log" class="log"></div>
+  </section>
+
+  <!-- ============ KIT ============ -->
+  <section id="tab-kit" class="tab">
+    <div class="card" id="gridCard">
+      <div class="card-title">Logo construction grid</div>
+      <p class="hint">Select your vector logo in Illustrator, choose what to show, then draw. The grid goes on its own "Logo Grid" layer.</p>
+      <div class="checks">
+        <label class="check"><input type="checkbox" data-grid="outlines" checked> Outlines</label>
+        <label class="check"><input type="checkbox" data-grid="anchors" checked> Anchor points</label>
+        <label class="check"><input type="checkbox" data-grid="handles" checked> Handles</label>
+        <label class="check"><input type="checkbox" data-grid="circles" checked> Circles</label>
+        <label class="check"><input type="checkbox" data-grid="gridlines"> Gridlines</label>
+        <label class="check"><input type="checkbox" data-grid="clearspace"> Clearspace</label>
+      </div>
+      <div class="actions">
+        <label class="check" style="margin:0">Colour <input type="color" id="gridColor" value="#1E90FF" style="width:44px;height:26px;padding:0;border:0;background:none"></label>
+        <button type="button" id="drawGrid" class="primary">Draw on selection</button>
+        <button type="button" id="removeGrid">Remove grids</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Logo export kit</div>
+      <p class="hint">Every logo as SVG, EPS, PDF and PNG (500/1000/2000 px) in full colour, black, white and brand colour.
+        Plus favicons (with favicon.ico) and social images: profile picture, Open Graph, X and LinkedIn banners.</p>
+      <button type="button" id="logoKit" class="primary">Export logo kit</button>
+      <p class="hint" id="logoKitNote"></p>
+    </div>
+    <div class="card">
+      <div class="card-title">Colour report <button type="button" id="refreshReport" class="link">Refresh</button></div>
+      <div id="colorReport"></div>
+    </div>
+    <div id="kitLog" class="log"></div>
+  </section>
+
+  <!-- ============ TEMPLATES ============ -->
+  <section id="tab-templates" class="tab">
+    <div class="card">
+      <div class="card-title">Add your design as a template</div>
+      <p class="hint">Open your tagged design in this app, save it, then scan it. See docs/TEMPLATE-GUIDE.md for the tags.</p>
+      <button type="button" id="scan">Scan open document</button>
+      <div id="scanResult"></div>
+      <form id="registerForm" hidden>
+        <label>Template name <input name="name" required></label>
+        <label>Type <select name="category"></select></label>
+        <fieldset>
+          <legend>Industries</legend>
+          <div id="industryChecks" class="checks"></div>
+        </fieldset>
+        <label>Description <textarea name="description" rows="2"></textarea></label>
+        <button type="submit" class="primary">Add to library</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Starter templates</div>
+      <p class="hint">Free templates drawn by PortableStudio's builder scripts. Build (or rebuild) them in Illustrator.</p>
+      <div id="starterList"></div>
+      <p class="hint">Want to see how tags work in a small file? <button type="button" id="sample" class="link">Create a tagged sample</button></p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Library <button type="button" id="openLibrary" class="link">Show folder</button></div>
+      <div id="libraryList"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Template packs</div>
+      <p class="hint">Install a pack you bought or downloaded (.zip), or browse the catalog set in Settings.</p>
+      <div class="actions">
+        <button type="button" id="installPackFile" class="primary">Install pack from file…</button>
+        <button type="button" id="loadPacks">Browse catalog</button>
+      </div>
+      <div id="packList"></div>
+    </div>
+
+    <details class="card">
+      <summary>Publish a pack</summary>
+      <p class="hint">Exports the selected templates as a folder you can host anywhere (website, GitHub Pages, S3). Point a catalog URL at its catalog.json.</p>
+      <div id="packTemplates" class="checks single"></div>
+      <div class="row">
+        <label>Pack id <input id="packId" placeholder="restaurant-essentials"></label>
+        <label>Price <input id="packPrice" placeholder="Free"></label>
+      </div>
+      <label>Pack name <input id="packName"></label>
+      <label>Purchase link <input id="packPurchase" placeholder="Optional, for paid packs"></label>
+      <button type="button" id="exportPack">Export pack…</button>
+    </details>
+    <div id="templatesLog" class="log"></div>
+  </section>
+
+  <!-- ============ SETTINGS ============ -->
+  <section id="tab-settings" class="tab">
+    <div class="card">
+      <div class="card-title">Local API</div>
+      <p id="apiStatus" class="hint"></p>
+      <label>API token
+        <span class="row tight"><input id="apiToken" type="password" readonly><button type="button" id="copyToken">Copy</button><button type="button" id="newToken">New</button></span>
+      </label>
+      <label class="check"><input type="checkbox" id="apiEnabled"> Run the API while this panel is open</label>
+    </div>
+
+    <div class="card">
+      <div class="card-title">MCP (Claude Desktop, Claude Code…)</div>
+      <p class="hint">Add this to your MCP client's config. It needs Node.js 18 or later.</p>
+      <pre id="mcpConfig" class="code"></pre>
+      <button type="button" id="copyMcp">Copy config</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">AI copywriting</div>
+      <label>Anthropic API key <input id="anthropicKey" type="password" placeholder="sk-ant-…" autocomplete="off"></label>
+      <label>Model
+        <select id="aiModel">
+          <option value="claude-opus-5-5">Claude Opus 5.5 (best)</option>
+          <option value="claude-sonnet-5-5">Claude Sonnet 5.5 (faster, cheaper)</option>
+          <option value="claude-haiku-4-5">Claude Haiku 4.5 (fastest)</option>
+        </select>
+      </label>
+      <button type="button" id="saveAi" class="primary">Save</button>
+      <p class="hint">The key is stored only on this computer, in your PortableStudio settings file.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Template catalog</div>
+      <label>Catalog URL <input id="catalogUrl" placeholder="https://…/catalog.json"></label>
+      <button type="button" id="saveCatalog">Save</button>
+    </div>
+
+    <div class="card" id="licenseCard">
+      <div class="card-title">License</div>
+      <p id="licenseStatus" class="hint"></p>
+      <div id="licenseForm">
+        <label>License key <input id="licenseKey" autocomplete="off"></label>
+        <div class="actions">
+          <button type="button" id="activateLicense" class="primary">Activate</button>
+          <button type="button" id="deactivateLicense">Deactivate</button>
+        </div>
+      </div>
+    </div>
+    <div id="settingsLog" class="log"></div>
+  </section>
+
+  <script src="js/bridge.js"></script>
+  <script src="js/studio.js"></script>
+  <script src="js/api-server.js"></script>
+  <script src="js/panel.js"></script>
+</body>
+</html>
