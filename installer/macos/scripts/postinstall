@@ -1,0 +1,12 @@
+#!/bin/sh
+# Runs after the .pkg installs PortableStudio: lets Adobe load the extension for the logged-in user.
+EXT="/Library/Application Support/Adobe/CEP/extensions/PortableStudio"
+xattr -dr com.apple.quarantine "$EXT" 2>/dev/null || true
+
+CONSOLE_USER="$(stat -f%Su /dev/console)"
+if [ -n "$CONSOLE_USER" ] && [ "$CONSOLE_USER" != "root" ]; then
+  for v in 9 10 11 12; do
+    sudo -u "$CONSOLE_USER" defaults write "com.adobe.CSXS.$v" PlayerDebugMode 1
+  done
+fi
+exit 0

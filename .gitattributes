@@ -6,3 +6,6 @@
 *.ai binary
 *.psd binary
 *.png binary
+installer/macos/scripts/* text eol=lf
+*.iss text eol=crlf
+*.ico binary

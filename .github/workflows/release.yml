@@ -1,0 +1,89 @@
+name: Release installers
+
+# Builds the Windows setup (.exe) and macOS installer (.pkg) and attaches them to the GitHub release.
+# Runs on version tags (v1.2.3), or manually for an existing tag.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to build and attach installers to (e.g. v0.3.0)
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  TAG: ${{ inputs.tag || github.ref_name }}
+
+jobs:
+  release:
+    name: Make sure the release exists
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create release if missing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --title "PortableStudio ${TAG#v}" \
+              --notes "Download the installer for your system below. See the README for details."
+
+  windows:
+    name: Windows installer (.exe)
+    needs: release
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Tag pushes build that tag; manual runs build the branch they were started from.
+          ref: ${{ github.event_name == 'push' && github.ref || '' }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: node scripts/package.js
+      - name: Build setup with Inno Setup
+        shell: pwsh
+        run: |
+          $v = node -p "require('./package.json').version"
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress | Out-Null }
+          & $iscc "/DAppVersion=$v" "/DSourceDir=$PWD\dist\PortableStudio-$v" installer\windows\PortableStudio.iss
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Attach to release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload $env:TAG (Get-Item dist\*-setup.exe).FullName --clobber --repo $env:GITHUB_REPOSITORY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: dist/*-setup.exe
+
+  macos:
+    name: macOS installer (.pkg)
+    needs: release
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Tag pushes build that tag; manual runs build the branch they were started from.
+          ref: ${{ github.event_name == 'push' && github.ref || '' }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: node scripts/package.js
+      - run: sh installer/macos/build-pkg.sh
+      - name: Check the package
+        run: pkgutil --payload-files dist/*.pkg | head -5 || pkgutil --check-signature dist/*.pkg || true
+      - name: Attach to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" dist/*.pkg --clobber --repo "$GITHUB_REPOSITORY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-installer
+          path: dist/*.pkg
