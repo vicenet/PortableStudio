@@ -57,9 +57,7 @@ Root: HKCU; Subkey: "Software\Adobe\CSXS.12"; ValueType: string; ValueName: "Pla
 FinishedLabel=PortableStudio is installed.%n%nRestart Illustrator or Photoshop, then open Window > Extensions > PortableStudio (in Photoshop: Window > Extensions (Legacy) > PortableStudio).
 
 [Code]
-const
-  FILE_ATTRIBUTE_REPARSE_POINT = $400;
-
+// FILE_ATTRIBUTE_REPARSE_POINT is predefined by Inno Setup.
 // A developer setup links this folder to a source checkout. Installing over it would overwrite the
 // source files, so stop instead.
 function IsLinkedFolder(const Path: String): Boolean;
