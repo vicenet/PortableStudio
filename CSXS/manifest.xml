@@ -47,6 +47,12 @@
                             <Height>2000</Height>
                         </MaxSize>
                     </Geometry>
+                    <Icons>
+                        <Icon Type="Normal">./icons/panel-normal.png</Icon>
+                        <Icon Type="RollOver">./icons/panel-rollover.png</Icon>
+                        <Icon Type="DarkNormal">./icons/panel-dark.png</Icon>
+                        <Icon Type="DarkRollOver">./icons/panel-darkrollover.png</Icon>
+                    </Icons>
                 </UI>
             </DispatchInfo>
         </Extension>

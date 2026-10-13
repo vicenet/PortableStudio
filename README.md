@@ -1,90 +1,162 @@
-# PortableStudio
+<p align="center">
+  <img src=".github/assets/banner.jpg" alt="PortableStudio: free brand guidelines generator plugin for Adobe Illustrator and Photoshop" width="100%">
+</p>
 
-**Open-source brand identity toolkit for Adobe Illustrator and Photoshop.**
-Design a template once, tag it, and PortableStudio fills it with any client's brand: name, colours,
-fonts, logos, photos and copy. Brand guidelines, logo presentations, social carousels and logo kits
-take minutes instead of days.
+<h1 align="center">PortableStudio: Brand Guidelines Generator for Adobe Illustrator &amp; Photoshop</h1>
 
-It also has a local API and an MCP server, so Claude and other tools can run it for you.
+<p align="center">
+  <b>Free, open-source Illustrator and Photoshop plugin that creates brand guidelines, logo presentations,
+  Instagram carousels and complete logo kits from templates, in minutes instead of days.</b>
+</p>
 
-## What it does
+<p align="center">
+  <a href="https://github.com/vicenet/PortableStudio/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/vicenet/PortableStudio?label=download&color=F2A541"></a>
+  <a href="https://github.com/vicenet/PortableStudio/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/vicenet/PortableStudio/total?color=1F3A5F"></a>
+  <a href="LICENSE"><img alt="License: GPL-3.0" src="https://img.shields.io/badge/license-GPL--3.0-1F3A5F"></a>
+  <img alt="Adobe Illustrator 2021+" src="https://img.shields.io/badge/Illustrator-2021%2B-FF9A00">
+  <img alt="Adobe Photoshop 2021+" src="https://img.shields.io/badge/Photoshop-2021%2B-31A8FF">
+  <img alt="Windows and macOS" src="https://img.shields.io/badge/Windows%20%7C%20macOS-supported-3E5C76">
+</p>
 
-| | |
-|---|---|
-| **Templates** | Tag your own Illustrator/Photoshop designs (`{{brand.name}}`, global swatches, Heading/Body styles, logo placeholders). Three starter templates included: 43-page Brand Guidelines, 12-page Logo Presentation, 5-slide Instagram Carousel |
-| **Generate & update** | One click fills one or many templates. The editable `.ai` stays open, and **Update open document** re-applies brand changes while keeping your manual edits |
-| **Brand profiles** | Save each client once: colours, fonts, logos (plus white/black versions), photos and copy |
-| **Logo kit** | SVG, EPS, PDF and PNG in colour, black, white and brand colour, favicons with `favicon.ico`, and social images |
-| **Logo grids** | Construction overlays on any vector logo: outlines, anchors, handles, circles, gridlines, clearspace |
-| **Colour tools** | Palette from your logo, industry palettes, tints and shades, CMYK, WCAG contrast checks |
-| **Copy** | Industry starter copy, or copy written by Claude from a short brief |
-| **Smart fitting** | Logos auto-trimmed and recoloured (even PNGs), long text shrunk to fit, photos cropped to their frames |
-| **Template packs** | Install `.zip` packs, publish your own, or browse a catalog |
-| **API & MCP** | Local REST API (`docs/API.md`) and MCP server (`docs/MCP.md`) |
+<p align="center">
+  <a href="https://github.com/vicenet/PortableStudio/releases/latest"><b>Download</b></a> ·
+  <a href="#features">Features</a> ·
+  <a href="#brand-guidelines-template">Templates</a> ·
+  <a href="docs/TEMPLATE-GUIDE.md">Make your own templates</a> ·
+  <a href="docs/MCP.md">Use with Claude (MCP)</a>
+</p>
+
+---
+
+**PortableStudio** is a free **Adobe Illustrator plugin** and **Photoshop extension** for designers who build
+brand identities. Design a **brand guidelines template** once (or use the free ones included), and
+PortableStudio fills it with any client's brand name, colours, fonts, logos, photos and copy. You get an
+**editable Illustrator file** plus a ready-to-send **PDF brand book**, **logo presentation**, **social
+media carousel** and **logo export kit**.
+
+It's a free, open-source alternative to paid brand guideline plugins and template kits: no subscription,
+no watermark, and the files are yours.
 
 ## Download
 
-Get the latest version from **[Releases](https://github.com/vicenet/PortableStudio/releases)**:
+| Platform | File | Install |
+|---|---|---|
+| **Windows 10/11** | [`PortableStudio-setup.exe`](https://github.com/vicenet/PortableStudio/releases/latest) | Run the installer (no admin rights needed) |
+| **macOS** (Intel & Apple silicon) | [`PortableStudio.pkg`](https://github.com/vicenet/PortableStudio/releases/latest) | Open the package and follow the steps |
+| **Any ZXP installer** | [`PortableStudio.zxp`](https://github.com/vicenet/PortableStudio/releases/latest) | Signed Adobe extension |
 
-- **Windows:** `PortableStudio-<version>-windows.zip`. Unzip, then double-click **Install PortableStudio.bat**.
-- **macOS:** `PortableStudio-<version>-macos.zip`. Unzip, then right-click **Install PortableStudio.command** > Open.
-- **Any ZXP installer:** `PortableStudio-<version>.zxp`.
+Then restart Illustrator/Photoshop and open **Window › Extensions › PortableStudio**
+(Photoshop: **Window › Extensions (Legacy)**). Requires Illustrator 2021+ and/or Photoshop 2021+.
 
-Then restart Illustrator/Photoshop and open **Window > Extensions > PortableStudio**.
+## Brand guidelines template
 
-## Install (development)
+The free **Essential Brand Guidelines** template creates a complete **43-page brand book**: brand
+overview, mission and values, tone of voice, logo usage, **logo construction grid**, clearspace,
+minimum size, logo misuse, colour palette with HEX/RGB/CMYK, tints, gradients, typography, brand pattern,
+stationery, photography and applications.
 
-Requirements: Illustrator 2021+ and/or Photoshop 2021+, Node.js 18+ (only for `npm install` and the MCP server).
+<p align="center">
+  <img src=".github/assets/guidelines-cover.jpg" width="49%" alt="Brand guidelines template cover page generated in Adobe Illustrator">
+  <img src=".github/assets/guidelines-palette.jpg" width="49%" alt="Brand colour palette page with HEX, RGB and CMYK values">
+  <img src=".github/assets/guidelines-logo-backgrounds.jpg" width="49%" alt="Logo on brand colour backgrounds page">
+  <img src=".github/assets/guidelines-logo-misuse.jpg" width="49%" alt="Logo misuse do and don't page in brand guidelines">
+  <img src=".github/assets/guidelines-construction.jpg" width="49%" alt="Logo construction grid with anchor points and circles">
+  <img src=".github/assets/guidelines-typography.jpg" width="49%" alt="Brand typography page with heading typeface">
+</p>
+
+## Logo presentation template
+
+A 12-page **logo presentation** for client pitches: the idea, the symbol, construction, colour versions,
+palette, the logo in use (profile picture, app icon, business card), pattern, website and typography.
+
+<p align="center">
+  <img src=".github/assets/logo-presentation-versions.jpg" width="49%" alt="Logo presentation colour versions on brand backgrounds">
+  <img src=".github/assets/logo-presentation-in-use.jpg" width="49%" alt="Logo mockups as profile picture, app icon and business card">
+</p>
+
+## Instagram carousel template
+
+A 5-slide **Instagram carousel** (1080×1350) filled from the brand copy, exported as one PNG per slide,
+ready to post.
+
+<p align="center">
+  <img src=".github/assets/instagram-carousel.jpg" width="100%" alt="Five-slide Instagram carousel template for a brand">
+</p>
+
+*All examples above were generated from the included sample brand, "Lumen Coffee".*
+
+## Features
+
+- **Template engine for Illustrator and Photoshop.** Tag any design with `{{brand.name}}`, global
+  swatches, Heading/Body styles and logo placeholders; PortableStudio fills text, colours, fonts, logos
+  and photos automatically.
+- **Update generated documents.** Change the brand later and re-apply it without losing manual edits.
+- **Logo export kit.** SVG, EPS, PDF and PNG in full colour, black, white and brand colour, plus
+  favicons (favicon.ico, Apple touch and Android icons) and social media profile pictures and banners.
+- **Logo construction grids.** Outlines, anchor points, bezier handles, circles, gridlines and clearspace
+  on any vector logo.
+- **Colour palette tools.** Extract a palette from a logo, industry palettes, tints and shades, CMYK
+  conversion and WCAG contrast checks.
+- **Brand copy.** Headline, mission, values, tone of voice and carousel text from industry starter copy,
+  or written by AI with your own Anthropic API key.
+- **Smart fitting.** PNG logos are trimmed and recoloured, long text shrinks to fit its box, and photos are
+  cropped to their frames.
+- **Brand profiles and batch export.** Save every client once and generate many templates in one click.
+- **Template packs.** Install `.zip` template packs, or publish and sell your own.
+- **Automation.** A local REST API and an **MCP server** for Claude Desktop and Claude Code.
+
+## How it works
+
+1. **Design and tag.** Build a template in Illustrator or Photoshop and tag what should change
+   ([template guide](docs/TEMPLATE-GUIDE.md)), or use the free starter templates.
+2. **Add the brand.** Name, colours, fonts, logos, photos and copy, saved as a reusable brand profile.
+3. **Generate.** Get an editable `.ai`/`.psd`, a PDF and per-page PNGs. Edit freely, then **Update** to
+   apply brand changes.
+
+## For developers
 
 ```bash
-git clone <this repo> PortableStudio
+git clone https://github.com/vicenet/PortableStudio.git
 cd PortableStudio
 npm install
-# Windows
-powershell -ExecutionPolicy Bypass -File scripts\dev-install.ps1
-# macOS
-sh scripts/dev-install.sh
+powershell -ExecutionPolicy Bypass -File scripts\dev-install.ps1   # Windows
+sh scripts/dev-install.sh                                           # macOS
+npm test
+npm run package                                                     # release builds in dist/
 ```
 
-Restart Illustrator and open **Window > Extensions > PortableStudio**. Then:
-
-1. Click **load the sample brand** in the welcome card.
-2. Go to **Templates** and **Build** the starter templates.
-3. Back on **Create**, select templates and click **Generate**.
-
-## Make your own templates
-
-See **[docs/TEMPLATE-GUIDE.md](docs/TEMPLATE-GUIDE.md)**. In short: design normally, name things with tags,
-then **Templates > Scan open document > Add to library**. Starter templates are drawn by scripts in
-`builders/`, which are a good example of how to build templates in code.
-
-## Packaging
-
-```bash
-npm run package     # dist/PortableStudio-<version>.zip, plus a signed .zxp if a certificate is configured
-npm test            # unit tests (tags, colour, brands, copy, licensing, packs, zip, API, ES3 safety)
-```
-
-## Project layout
+The project is plain JavaScript (Adobe CEP panel + Node) and ExtendScript, with no framework. See
+[CONTRIBUTING.md](CONTRIBUTING.md), [docs/API.md](docs/API.md) and [docs/MCP.md](docs/MCP.md).
+Releases are built by GitHub Actions: pushing a `v*` tag builds the Windows `.exe` and macOS `.pkg`.
 
 ```
 index.html, css/, js/   Panel UI (Adobe CEP: Chromium + Node.js)
-host/                   ExtendScript that runs inside Illustrator / Photoshop
-core/                   Node modules shared by the panel and the MCP server (API, brands, packs, colour, copy...)
+host/                   ExtendScript for Illustrator / Photoshop
+core/                   Shared Node modules: API, brands, packs, colour, copy
 builders/               Scripts that draw the starter templates
-templates/              Template library (template file + thumbnail + template.json)
-config/                 Industries, template types, app settings
+templates/              Template library
+installer/              Windows (Inno Setup) and macOS (pkgbuild) installers
 mcp/server.js           MCP server
-docs/                   Template guide, API, MCP
 ```
+
+## FAQ
+
+**Is PortableStudio free?** Yes. It's free and open source (GPL-3.0), and the starter templates are CC0,
+so you can use them in commercial client work without attribution.
+
+**Can I use my own brand guidelines template?** Yes. Tag your Illustrator or Photoshop file following the
+[template guide](docs/TEMPLATE-GUIDE.md) and add it to the library.
+
+**Does it work with Photoshop?** Yes: text, colours, fonts, logos (including smart-object mockups) and
+per-artboard carousel export. Logo kits and construction grids are Illustrator features.
+
+**Why does Windows/macOS warn when installing?** The installers aren't signed with paid developer
+certificates yet. They're built by GitHub Actions from this public source code.
 
 ## Licence
 
-- **Code:** [GPL-3.0](LICENSE). You can use, study, change and share it. If you distribute a modified
-  version, it must stay open source under the same licence.
-- **Starter templates and sample brand** (`templates/`, `assets/sample/`): [CC0](templates/LICENSE.md),
-  so use them in any client work with no attribution needed.
-- **Template packs** sold or shared by others are licensed by their authors.
+Code: [GPL-3.0](LICENSE). Starter templates and sample brand: [CC0](templates/LICENSE.md). Template packs
+by others are licensed by their authors. PortableStudio is an independent project, not affiliated with
+Adobe. Illustrator and Photoshop are trademarks of Adobe Inc.
 
-PortableStudio is an independent project and is not affiliated with Adobe or any other plugin vendor.
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+⭐ **If PortableStudio saves you time, star the repo.** It helps other designers find it.

@@ -277,3 +277,5 @@ pre.code {
 .steps li { margin: 4px 0; }
 details.sub { margin: 4px 0 6px; }
 details.sub > summary { cursor: pointer; margin-bottom: 6px; }
+
+.app-title { display: inline-flex; align-items: center; gap: 7px; }

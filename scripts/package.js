@@ -28,7 +28,7 @@ const STAGE = path.join(OUT, NAME);
 const INSTALL = path.join(ROOT, 'scripts', 'install');
 
 // What ships. Tests, dev scripts and the .debug file stay out.
-const INCLUDE = ['CSXS', 'index.html', 'css', 'js', 'host', 'core', 'config', 'builders', 'assets', 'templates', 'mcp', 'docs',
+const INCLUDE = ['CSXS', 'icons', 'index.html', 'css', 'js', 'host', 'core', 'config', 'builders', 'assets', 'templates', 'mcp', 'docs',
   'LICENSE', 'README.md', 'package.json'];
 const JUNK = new Set(['.DS_Store', 'Thumbs.db', '__MACOSX']);
 
