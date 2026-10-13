@@ -1,0 +1,26 @@
+PortableStudio - installation
+=============================
+
+Requires Adobe Illustrator 2021 or later and/or Photoshop 2021 or later.
+
+WINDOWS
+  1. Unzip this download.
+  2. Double-click "Install PortableStudio.bat".
+  3. Restart Illustrator/Photoshop and open Window > Extensions > PortableStudio
+     (Photoshop: Window > Extensions (Legacy) > PortableStudio).
+  You can also install the .zxp with any ZXP installer (e.g. Anastasiy's Extension Manager or aescripts ZXP Installer).
+
+MACOS
+  1. Unzip this download.
+  2. Right-click "Install PortableStudio.command" > Open (the first time macOS asks you to confirm).
+  3. Restart Illustrator/Photoshop and open Window > Extensions > PortableStudio.
+
+FIRST STEPS
+  - Click "load the sample brand" on the Create tab.
+  - Templates tab > Starter templates > Build.
+  - Create tab > select templates > Generate.
+
+Optional: the MCP server (for Claude Desktop etc.) needs Node.js 18+. See docs/MCP.md inside the
+PortableStudio folder.
+
+PortableStudio is open source (GPL-3.0): https://github.com/vicenet/PortableStudio

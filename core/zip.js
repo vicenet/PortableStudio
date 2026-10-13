@@ -18,7 +18,8 @@ function crc32(buf) {
   return (c ^ 0xffffffff) >>> 0;
 }
 
-// entries: [{ name: 'dir/file.ext', data: Buffer }] -> Buffer
+// entries: [{ name: 'dir/file.ext', data: Buffer, mode?: 0o755 }] -> Buffer
+// mode sets Unix permissions (e.g. to keep a macOS .command script executable).
 function createZip(entries) {
   const locals = [];
   const centrals = [];
@@ -46,7 +47,7 @@ function createZip(entries) {
 
     const central = Buffer.alloc(46);
     central.writeUInt32LE(0x02014b50, 0);
-    central.writeUInt16LE(20, 4);
+    central.writeUInt16LE(e.mode ? (3 << 8) | 20 : 20, 4); // made by: Unix when a mode is given
     central.writeUInt16LE(20, 6);
     central.writeUInt16LE(0x0800, 8);
     central.writeUInt16LE(method, 10);
@@ -55,6 +56,7 @@ function createZip(entries) {
     central.writeUInt32LE(body.length, 20);
     central.writeUInt32LE(e.data.length, 24);
     central.writeUInt16LE(name.length, 28);
+    if (e.mode) central.writeUInt32LE(((0o100000 | e.mode) << 16) >>> 0, 38); // external attrs
     central.writeUInt32LE(offset, 42);
     centrals.push(central, name);
 

@@ -22,6 +22,16 @@ It also has a local API and an MCP server, so Claude and other tools can run it 
 | **Template packs** | Install `.zip` packs, publish your own, or browse a catalog |
 | **API & MCP** | Local REST API (`docs/API.md`) and MCP server (`docs/MCP.md`) |
 
+## Download
+
+Get the latest version from **[Releases](https://github.com/vicenet/PortableStudio/releases)**:
+
+- **Windows:** `PortableStudio-<version>-windows.zip`. Unzip, then double-click **Install PortableStudio.bat**.
+- **macOS:** `PortableStudio-<version>-macos.zip`. Unzip, then right-click **Install PortableStudio.command** > Open.
+- **Any ZXP installer:** `PortableStudio-<version>.zxp`.
+
+Then restart Illustrator/Photoshop and open **Window > Extensions > PortableStudio**.
+
 ## Install (development)
 
 Requirements: Illustrator 2021+ and/or Photoshop 2021+, Node.js 18+ (only for `npm install` and the MCP server).

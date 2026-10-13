@@ -76,9 +76,14 @@ function buildPrompt(brand, { brief = '', slides = 5 } = {}) {
 }
 
 let AnthropicCtor = null;
+// Release builds ship the SDK as one bundled file in vendor/ (see scripts/package.js);
+// a source checkout uses node_modules.
 function loadSdk() {
   if (!AnthropicCtor) {
-    const mod = require('@anthropic-ai/sdk');
+    let mod;
+    const vendored = require('path').join(__dirname, '..', 'vendor', 'anthropic-sdk.js');
+    if (require('fs').existsSync(vendored)) mod = require(vendored);
+    else mod = require('@anthropic-ai/sdk');
     AnthropicCtor = mod.default || mod.Anthropic || mod;
   }
   return AnthropicCtor;
