@@ -430,15 +430,36 @@
 
   async function generate() {
     const ids = state.templates.filter((t) => state.selected.has(t.id)).map((t) => t.id);
-    const progress = log('#log', 'Starting…');
-    const res = await Studio.generate({
-      brand: state.brand,
-      templateIds: ids,
-      exportPages: $('#exportPages').checked,
-      onProgress: (t, i, n) => { progress.innerHTML = `Generating <b>${esc(t.name)}</b> (${i + 1} of ${n})…`; },
-    });
-    progress.remove();
+    const progress = log('#log', 'Starting…', 'progress');
+    let cancelled = false;
+    const cancel = $('#cancelGenerate');
+    cancel.hidden = ids.length < 2;
+    cancel.disabled = false;
+    cancel.textContent = 'Cancel after this template';
+    cancel.onclick = () => { cancelled = true; cancel.disabled = true; cancel.textContent = 'Cancelling…'; };
+    let res;
+    try {
+      res = await Studio.generate({
+        brand: state.brand,
+        templateIds: ids,
+        exportPages: $('#exportPages').checked,
+        shouldCancel: () => cancelled,
+        onProgress: (t, i, n) => {
+          const pct = Math.round((i / n) * 100);
+          progress.innerHTML = `<div class="progress-row">
+            <span class="thumb small">${t.thumbPath ? `<img src="${esc(fileUrl(t.thumbPath))}" alt="">` : ''}</span>
+            <span>Generating <b>${esc(t.name)}</b><br><span class="hint">${i + 1} of ${n} · ${esc(state.brand.name)}</span></span>
+          </div><div class="bar"><span style="width:${Math.max(4, pct)}%"></span></div>`;
+        },
+      });
+    } finally {
+      progress.remove();
+      cancel.hidden = true;
+      cancel.onclick = null;
+    }
     reportGenerate(res);
+    const stopped = res.results.filter((r) => r.cancelled).length;
+    if (stopped) log('#log', `Cancelled: ${stopped} template(s) not generated.`, 'warn');
     const done = res.results.filter((r) => !r.skipped);
     if (done.length) {
       const warnings = done.reduce((n, r) => n + r.report.warnings.length, 0);
@@ -452,6 +473,7 @@
 
   function reportGenerate(res) {
     for (const r of res.results) {
+      if (r.cancelled) continue;
       if (r.skipped) {
         log('#log', `Skipped <b>${esc(r.templateName)}</b>: ${esc(r.reason)}`, 'warn');
         continue;

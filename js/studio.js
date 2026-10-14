@@ -232,7 +232,8 @@ const Studio = (() => {
   }
 
   // ---- generate (one or many templates) ----
-  async function generate({ brand, templateIds, exportPages = false, pageWidth = 0, onProgress }) {
+  // shouldCancel() is checked between templates: a template that has started always finishes.
+  async function generate({ brand, templateIds, exportPages = false, pageWidth = 0, onProgress, shouldCancel }) {
     core.license.requireLicense();
     const b = requireBrandName(core.brands.normalize(brand));
     if (!templateIds || !templateIds.length) throw new Error('Choose at least one template.');
@@ -240,6 +241,10 @@ const Studio = (() => {
     const results = [];
     for (const id of templateIds) {
       const t = core.templates.get(id);
+      if (shouldCancel && shouldCancel()) {
+        results.push({ templateId: id, templateName: t.name, skipped: true, cancelled: true, reason: 'Cancelled.' });
+        continue;
+      }
       if (t.app !== app()) {
         results.push({ templateId: id, templateName: t.name, skipped: true, reason: `Needs ${t.app}; open it there.` });
         continue;

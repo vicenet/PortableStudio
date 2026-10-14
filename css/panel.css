@@ -279,3 +279,11 @@ details.sub { margin: 4px 0 6px; }
 details.sub > summary { cursor: pointer; margin-bottom: 6px; }
 
 .app-title { display: inline-flex; align-items: center; gap: 7px; }
+
+/* generation progress */
+.log .entry.progress { border-left-color: var(--accent); }
+.progress-row { display: flex; gap: 8px; align-items: center; }
+.progress-row .thumb.small { width: 54px; }
+.log .bar { height: 4px; background: var(--field); border-radius: 2px; margin-top: 7px; overflow: hidden; }
+.log .bar span { display: block; height: 100%; background: var(--accent); transition: width .3s; }
+#cancelGenerate { width: 100%; margin-top: -4px; }
