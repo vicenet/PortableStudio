@@ -20,6 +20,7 @@
 
   <div id="fatal" class="notice error" hidden></div>
   <div id="licenseNotice" class="notice warn" hidden></div>
+  <div id="updateNotice" class="notice update" hidden></div>
 
   <!-- ============ CREATE ============ -->
   <section id="tab-create" class="tab active">
@@ -228,6 +229,10 @@
 
   <!-- ============ SETTINGS ============ -->
   <section id="tab-settings" class="tab">
+    <div class="card">
+      <div class="card-title">Updates</div>
+      <label class="check"><input type="checkbox" id="checkUpdates" checked> Tell me when a new version is out (asks GitHub once a day)</label>
+    </div>
     <div class="card">
       <div class="card-title">Local API</div>
       <p id="apiStatus" class="hint"></p>

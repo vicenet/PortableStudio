@@ -287,3 +287,5 @@ details.sub > summary { cursor: pointer; margin-bottom: 6px; }
 .log .bar { height: 4px; background: var(--field); border-radius: 2px; margin-top: 7px; overflow: hidden; }
 .log .bar span { display: block; height: 100%; background: var(--accent); transition: width .3s; }
 #cancelGenerate { width: 100%; margin-top: -4px; }
+
+.notice.update { background: rgba(75, 141, 248, .14); border: 1px solid var(--accent); border-radius: 4px; padding: 8px; margin-bottom: 8px; }

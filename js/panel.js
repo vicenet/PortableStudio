@@ -717,6 +717,16 @@
   }
 
   function bindSettings() {
+    try {
+      const u = JSON.parse(localStorage.getItem('portablestudio.updateCheck')) || {};
+      $('#checkUpdates').checked = !u.off;
+    } catch { /* first run */ }
+    $('#checkUpdates').addEventListener('change', (e) => {
+      let u = {};
+      try { u = JSON.parse(localStorage.getItem('portablestudio.updateCheck')) || {}; } catch { /* first run */ }
+      u.off = !e.target.checked;
+      try { localStorage.setItem('portablestudio.updateCheck', JSON.stringify(u)); } catch { /* not critical */ }
+    });
     $('#copyToken').addEventListener('click', () => {
       Host.copyText(C.settings.load().apiToken);
       log('#settingsLog', 'API token copied.', 'ok');
@@ -794,6 +804,33 @@
     }
   }
 
+  // Tells the user about a newer release (GitHub, at most once a day). Can be turned off in Settings.
+  function checkForUpdate() {
+    let last = {};
+    try { last = JSON.parse(localStorage.getItem('portablestudio.updateCheck')) || {}; } catch { /* first run */ }
+    if (last.off) return;
+    const save = () => { try { localStorage.setItem('portablestudio.updateCheck', JSON.stringify(last)); } catch { /* not critical */ } };
+    const newer = (a, b) => {
+      const pa = String(a).replace(/^v/, '').split('.').map(Number);
+      const pb = String(b).replace(/^v/, '').split('.').map(Number);
+      for (let i = 0; i < 3; i++) if ((pa[i] || 0) !== (pb[i] || 0)) return (pa[i] || 0) > (pb[i] || 0);
+      return false;
+    };
+    const show = () => {
+      const version = require(`${Host.info.root}/package.json`).version;
+      if (!last.tag || !newer(last.tag, version) || last.dismissed === last.tag) return;
+      const el = $('#updateNotice');
+      el.innerHTML = `PortableStudio ${esc(last.tag.replace(/^v/, ''))} is out. <button class="link" id="getUpdate">Download</button> · <button class="link" id="skipUpdate">Later</button>`;
+      el.hidden = false;
+      $('#getUpdate').onclick = () => window.cep.util.openURLInDefaultBrowser(last.url);
+      $('#skipUpdate').onclick = () => { el.hidden = true; last.dismissed = last.tag; save(); };
+    };
+    if (last.at && Date.now() - last.at < 864e5) return show();
+    Host.core('http').getJson('https://api.github.com/repos/vicenet/PortableStudio/releases/latest', { 'User-Agent': 'PortableStudio' })
+      .then((j) => { Object.assign(last, { at: Date.now(), tag: j.tag_name, url: j.html_url }); save(); show(); })
+      .catch(() => { /* offline or rate-limited: try again tomorrow */ });
+  }
+
   async function start() {
     bindTabs();
     try {
@@ -812,6 +849,7 @@
       ApiServer.start();
       loadFonts();
       C.license.check().then(renderLicense).catch(() => renderLicense());
+      setTimeout(checkForUpdate, 3000);
     } catch (e) {
       $('#hostBadge').textContent = 'error';
       $('#fatal').hidden = false;

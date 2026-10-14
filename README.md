@@ -30,6 +30,10 @@
 
 ---
 
+<p align="center">
+  <img src=".github/assets/demo.gif" width="100%" alt="PortableStudio generating brand guidelines, colour palette, logo construction grid, logo presentation and Instagram carousel pages">
+</p>
+
 **PortableStudio** is a free **Adobe Illustrator plugin** and **Photoshop extension** for designers who build
 brand identities. Design a **brand guidelines template** once (or use the free ones included), and
 PortableStudio fills it with any client's brand name, colours, fonts, logos, photos and copy. You get an
@@ -129,6 +133,7 @@ npm run package                                                     # release bu
 
 The project is plain JavaScript (Adobe CEP panel + Node) and ExtendScript, with no framework. See
 [CONTRIBUTING.md](CONTRIBUTING.md), [docs/API.md](docs/API.md) and [docs/MCP.md](docs/MCP.md).
+Signed installers: [docs/SIGNING.md](docs/SIGNING.md). Adobe Exchange listing: [docs/ADOBE-EXCHANGE.md](docs/ADOBE-EXCHANGE.md).
 Releases are built by GitHub Actions: pushing a `v*` tag builds the Windows `.exe` and macOS `.pkg`.
 
 ```
@@ -157,7 +162,10 @@ certificates yet. They're built by GitHub Actions from this public source code.
 
 ## Licence
 
-Found a security problem? See [SECURITY.md](SECURITY.md).
+Found a security problem? See [SECURITY.md](SECURITY.md). [Privacy](PRIVACY.md): no account, no tracking.
+
+**Need grids too?** [PortableGrid](https://github.com/vicenet/PortableGrid) adds column, baseline and golden-ratio
+grids, magazine layouts and social safe zones, and can use your PortableStudio brands.
 
 Code: [GPL-3.0](LICENSE). Starter templates and sample brand: [CC0](templates/LICENSE.md). Template packs
 by others are licensed by their authors. PortableStudio is an independent project, not affiliated with

@@ -1,6 +1,6 @@
 {
   "name": "portablestudio",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "description": "Open-source brand template engine for Adobe Illustrator and Photoshop: tagged templates, logo kits, logo grids, AI copy, a local API and an MCP server.",
   "scripts": {

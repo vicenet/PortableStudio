@@ -45,6 +45,9 @@ jobs:
     permissions:
       contents: write
     timeout-minutes: 30
+    env:
+      # Only used to decide whether to sign (docs/SIGNING.md).
+      WINDOWS_CERT_PFX_BASE64: ${{ secrets.WINDOWS_CERT_PFX_BASE64 }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -64,6 +67,22 @@ jobs:
           if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress | Out-Null }
           & $iscc "/DAppVersion=$v" "/DSourceDir=$PWD\dist\PortableStudio-$v" installer\windows\PortableStudio.iss
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      # Signs the setup with a code-signing certificate when the repository has one (see docs/SIGNING.md).
+      # Without the secrets the installer stays unsigned, as before.
+      - name: Sign the installer
+        if: env.WINDOWS_CERT_PFX_BASE64 != ''
+        shell: pwsh
+        env:
+          WINDOWS_CERT_PASSWORD: ${{ secrets.WINDOWS_CERT_PASSWORD }}
+        run: |
+          $pfx = Join-Path $env:RUNNER_TEMP 'cert.pfx'
+          [IO.File]::WriteAllBytes($pfx, [Convert]::FromBase64String($env:WINDOWS_CERT_PFX_BASE64))
+          $signtool = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin" -Recurse -Filter signtool.exe |
+            Where-Object { $_.FullName -match 'x64' } | Sort-Object FullName -Descending | Select-Object -First 1
+          & $signtool.FullName sign /f $pfx /p $env:WINDOWS_CERT_PASSWORD /fd SHA256 /tr http://timestamp.digicert.com /td SHA256 (Get-Item dist\*-setup.exe).FullName
+          $code = $LASTEXITCODE
+          Remove-Item $pfx -Force
+          if ($code -ne 0) { exit $code }
       - name: Attach to release
         shell: pwsh
         env:
@@ -81,6 +100,9 @@ jobs:
     permissions:
       contents: write
     timeout-minutes: 30
+    env:
+      # Only used to decide whether to sign (docs/SIGNING.md).
+      APPLE_INSTALLER_CERT_P12_BASE64: ${{ secrets.APPLE_INSTALLER_CERT_P12_BASE64 }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -93,6 +115,33 @@ jobs:
       - run: npm ci
       - run: node scripts/package.js
       - run: sh installer/macos/build-pkg.sh
+      # Signs and notarises the package with an Apple Developer ID when the repository has one
+      # (see docs/SIGNING.md). Without the secrets the package stays unsigned, as before.
+      - name: Sign and notarise the package
+        if: env.APPLE_INSTALLER_CERT_P12_BASE64 != ''
+        env:
+          APPLE_INSTALLER_CERT_PASSWORD: ${{ secrets.APPLE_INSTALLER_CERT_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+        run: |
+          set -e
+          KEYCHAIN="$RUNNER_TEMP/signing.keychain-db"
+          KEYCHAIN_PASSWORD="$(openssl rand -hex 16)"
+          echo "$APPLE_INSTALLER_CERT_P12_BASE64" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings -lut 3600 "$KEYCHAIN"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security import "$RUNNER_TEMP/cert.p12" -P "$APPLE_INSTALLER_CERT_PASSWORD" -k "$KEYCHAIN" -T /usr/bin/productsign
+          security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
+          rm "$RUNNER_TEMP/cert.p12"
+          IDENTITY="$(security find-identity -v "$KEYCHAIN" | grep 'Developer ID Installer' | head -1 | sed -E 's/.*"(.*)"/\1/')"
+          PKG="$(ls dist/*.pkg)"
+          productsign --sign "$IDENTITY" --keychain "$KEYCHAIN" "$PKG" "$PKG.signed"
+          mv "$PKG.signed" "$PKG"
+          xcrun notarytool submit "$PKG" --apple-id "$APPLE_ID" --team-id "$APPLE_TEAM_ID" --password "$APPLE_APP_PASSWORD" --wait
+          xcrun stapler staple "$PKG"
+          security delete-keychain "$KEYCHAIN"
       - name: Check the package
         run: pkgutil --payload-files dist/*.pkg | head -5 || pkgutil --check-signature dist/*.pkg || true
       - name: Attach to release
