@@ -5,7 +5,16 @@ const Host = (() => {
   const node = typeof require === 'function' ? require : null;
   const info = { app: null, root: null };
 
+  // One script at a time: the panel and the local API can both call the host, and overlapping
+  // evalScript calls can make Illustrator drop a reply that every later call then waits behind.
+  let queue = Promise.resolve();
   function evalRaw(script) {
+    const p = queue.then(() => evalOnce(script), () => evalOnce(script));
+    queue = p.catch(() => {});
+    return p;
+  }
+
+  function evalOnce(script) {
     return new Promise((resolve, reject) => {
       if (!cep) return reject(new Error('Not running inside Illustrator or Photoshop.'));
       cep.evalScript(script, (result) => {
