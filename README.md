@@ -16,6 +16,8 @@
   <img alt="Adobe Illustrator 2021+" src="https://img.shields.io/badge/Illustrator-2021%2B-FF9A00">
   <img alt="Adobe Photoshop 2021+" src="https://img.shields.io/badge/Photoshop-2021%2B-31A8FF">
   <img alt="Windows and macOS" src="https://img.shields.io/badge/Windows%20%7C%20macOS-supported-3E5C76">
+  <a href="https://github.com/vicenet/PortableStudio/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/vicenet/PortableStudio/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://scorecard.dev/viewer/?uri=github.com/vicenet/PortableStudio"><img alt="OpenSSF Scorecard" src="https://api.scorecard.dev/projects/github.com/vicenet/PortableStudio/badge"></a>
 </p>
 
 <p align="center">
@@ -154,6 +156,8 @@ per-artboard carousel export. Logo kits and construction grids are Illustrator f
 certificates yet. They're built by GitHub Actions from this public source code.
 
 ## Licence
+
+Found a security problem? See [SECURITY.md](SECURITY.md).
 
 Code: [GPL-3.0](LICENSE). Starter templates and sample brand: [CC0](templates/LICENSE.md). Template packs
 by others are licensed by their authors. PortableStudio is an independent project, not affiliated with

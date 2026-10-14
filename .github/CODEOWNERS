@@ -1,0 +1,5 @@
+# Every change needs the maintainer's review; workflows and installers especially.
+*                   @vicenet
+/.github/           @vicenet
+/installer/         @vicenet
+/scripts/           @vicenet

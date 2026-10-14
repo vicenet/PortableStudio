@@ -12,7 +12,7 @@ on:
         required: true
 
 permissions:
-  contents: write
+  contents: read
 
 env:
   TAG: ${{ inputs.tag || github.ref_name }}
@@ -21,7 +21,15 @@ jobs:
   release:
     name: Make sure the release exists
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 30
     steps:
+      - name: Check the tag
+        run: |
+          if ! printf %s "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$'; then
+            echo "::error::Not a version tag: $TAG"; exit 1
+          fi
       - name: Create release if missing
         env:
           GH_TOKEN: ${{ github.token }}
@@ -34,12 +42,16 @@ jobs:
     name: Windows installer (.exe)
     needs: release
     runs-on: windows-latest
+    permissions:
+      contents: write
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           # Tag pushes build that tag; manual runs build the branch they were started from.
           ref: ${{ github.event_name == 'push' && github.ref || '' }}
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
       - run: npm ci
@@ -57,7 +69,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release upload $env:TAG (Get-Item dist\*-setup.exe).FullName --clobber --repo $env:GITHUB_REPOSITORY
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: windows-installer
           path: dist/*-setup.exe
@@ -66,12 +78,16 @@ jobs:
     name: macOS installer (.pkg)
     needs: release
     runs-on: macos-latest
+    permissions:
+      contents: write
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           # Tag pushes build that tag; manual runs build the branch they were started from.
           ref: ${{ github.event_name == 'push' && github.ref || '' }}
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
       - run: npm ci
@@ -83,7 +99,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release upload "$TAG" dist/*.pkg --clobber --repo "$GITHUB_REPOSITORY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: macos-installer
           path: dist/*.pkg
