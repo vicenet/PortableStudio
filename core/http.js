@@ -8,6 +8,22 @@ const { fileURLToPath } = require('url');
 
 const TIMEOUT_MS = 30000;
 
+// Where a redirect may go, and with which headers. Redirects never reach file:// URLs or
+// downgrade https to http, and credentials are only kept on the same origin.
+const CREDENTIAL_HEADERS = ['authorization', 'cookie', 'proxy-authorization', 'x-api-key'];
+function redirectTarget(from, location, headers) {
+  const src = new URL(from);
+  const dest = new URL(location, from);
+  if (dest.protocol !== 'https:' && dest.protocol !== 'http:') throw new Error(`Refused redirect to ${dest.protocol} URL.`);
+  if (src.protocol === 'https:' && dest.protocol !== 'https:') throw new Error('Refused redirect from https to http.');
+  const out = {};
+  for (const [k, v] of Object.entries(headers || {})) {
+    if (dest.origin !== src.origin && CREDENTIAL_HEADERS.includes(k.toLowerCase())) continue;
+    out[k] = v;
+  }
+  return { url: dest.toString(), headers: out };
+}
+
 function request(url, { method = 'GET', headers = {}, body = null, redirects = 3 } = {}) {
   if (url.startsWith('file:')) {
     return Promise.resolve().then(() => {
@@ -20,8 +36,14 @@ function request(url, { method = 'GET', headers = {}, body = null, redirects = 3
     const req = lib.request(url, { method, headers, timeout: TIMEOUT_MS }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location && redirects > 0) {
         res.resume();
-        const next = new URL(res.headers.location, url).toString();
-        resolve(request(next, { method, headers, body, redirects: redirects - 1 }));
+        let next;
+        try {
+          next = redirectTarget(url, res.headers.location, headers);
+        } catch (e) {
+          reject(e);
+          return;
+        }
+        resolve(request(next.url, { method, headers: next.headers, body, redirects: redirects - 1 }));
         return;
       }
       const chunks = [];
@@ -66,4 +88,4 @@ async function download(url, dest) {
   return dest;
 }
 
-module.exports = { request, getJson, postForm, download };
+module.exports = { request, getJson, postForm, download, redirectTarget };
