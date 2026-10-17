@@ -45,6 +45,12 @@ pass contrast checks, then generate the guidelines and a 5-slide Instagram carou
 | `export_logo_kit` | Illustrator | Logo formats, colour versions, favicons, social images |
 | `list_template_packs`, `install_template_pack` | | Browse and install packs |
 
+Every tool declares all four MCP hints (`readOnlyHint`, `destructiveHint`, `idempotentHint`,
+`openWorldHint`) so your client can ask before anything that changes or deletes data. Only
+`write_brand_copy`, `list_template_packs` and `install_template_pack` reach the internet. `save_brand`,
+`delete_brand`, `write_brand_copy` (when saving) and `install_template_pack` (when overwriting) can
+replace existing data. `generate` and `export_logo_kit` always write into a new timestamped folder.
+
 `write_brand_copy` with `source: "ai"` uses the Anthropic API key from PortableStudio Settings, or the
 `ANTHROPIC_API_KEY` environment variable of the MCP server.
 
