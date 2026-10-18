@@ -171,4 +171,6 @@ Code: [GPL-3.0](LICENSE). Starter templates and sample brand: [CC0](templates/LI
 by others are licensed by their authors. PortableStudio is an independent project, not affiliated with
 Adobe. Illustrator and Photoshop are trademarks of Adobe Inc.
 
+[![M8ven Score](https://m8ven.ai/badge/mcp/vicenet-portablestudio-1pn5eu?v=2be5b00c2b96628c2c57d2a1bc74d726)](https://m8ven.ai/mcp/vicenet-portablestudio-1pn5eu?s=readme)
+
 ⭐ **If PortableStudio saves you time, star the repo.** It helps other designers find it.
