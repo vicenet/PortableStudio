@@ -54,6 +54,8 @@ no watermark, and the files are yours.
 Then restart Illustrator/Photoshop and open **Window › Extensions › PortableStudio**
 (Photoshop: **Window › Extensions (Legacy)**). Requires Illustrator 2021+ and/or Photoshop 2021+.
 
+If it saves you time, a ⭐ on this repo helps other designers find it.
+
 ## Brand guidelines template
 
 The free **Essential Brand Guidelines** template creates a complete **43-page brand book**: brand
