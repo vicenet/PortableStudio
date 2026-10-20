@@ -1,9 +1,14 @@
 name: Release installers
 
-# Builds the Windows setup (.exe) and macOS installer (.pkg) and attaches them to the GitHub release.
-# Runs on version tags (v1.2.3), or manually for an existing tag.
+# Builds the Windows setup (.exe), the macOS installer (.pkg) and the macOS zip, and attaches them
+# to the GitHub release. Runs when:
+#   - the version in package.json changes on main: tags v<version> and releases it automatically,
+#   - a version tag (v1.2.3) is pushed,
+#   - or manually, for an existing tag.
 on:
   push:
+    branches: [main]
+    paths: [package.json]
     tags: ['v*']
   workflow_dispatch:
     inputs:
@@ -14,9 +19,6 @@ on:
 permissions:
   contents: read
 
-env:
-  TAG: ${{ inputs.tag || github.ref_name }}
-
 jobs:
   release:
     name: Make sure the release exists
@@ -24,36 +26,68 @@ jobs:
     permissions:
       contents: write
     timeout-minutes: 30
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+      build: ${{ steps.create.outputs.build }}
     steps:
-      - name: Check the tag
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Work out the tag
+        id: tag
+        env:
+          INPUT_TAG: ${{ inputs.tag }}
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
         run: |
+          if [ -n "$INPUT_TAG" ]; then TAG="$INPUT_TAG"
+          elif [ "$REF_TYPE" = tag ]; then TAG="$REF_NAME"
+          else TAG="v$(node -p "require('./package.json').version")"
+          fi
           if ! printf %s "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$'; then
             echo "::error::Not a version tag: $TAG"; exit 1
           fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
       - name: Create release if missing
+        id: create
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.tag.outputs.tag }}
+          REF_TYPE: ${{ github.ref_type }}
+          EVENT: ${{ github.event_name }}
         run: |
-          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
-            gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --title "PortableStudio ${TAG#v}" \
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            # A push to main that didn't change the version has nothing new to release.
+            if [ "$EVENT" = push ] && [ "$REF_TYPE" = branch ]; then
+              echo "$TAG is already released; nothing to do."
+              echo "build=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          else
+            gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title "PortableStudio ${TAG#v}" \
               --notes "Download the installer for your system below. See the README for details."
+          fi
+          echo "build=true" >> "$GITHUB_OUTPUT"
 
   windows:
     name: Windows installer (.exe)
     needs: release
+    if: needs.release.outputs.build == 'true'
     runs-on: windows-latest
     permissions:
       contents: write
     timeout-minutes: 30
     env:
+      TAG: ${{ needs.release.outputs.tag }}
       # Only used to decide whether to sign (docs/SIGNING.md).
       WINDOWS_CERT_PFX_BASE64: ${{ secrets.WINDOWS_CERT_PFX_BASE64 }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          # Tag pushes build that tag; manual runs build the branch they were started from.
-          ref: ${{ github.event_name == 'push' && github.ref || '' }}
+          # Pushes build the commit that was released; manual runs build the branch they were started from.
+          ref: ${{ github.event_name == 'push' && github.sha || '' }}
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
@@ -96,19 +130,21 @@ jobs:
   macos:
     name: macOS installer (.pkg)
     needs: release
+    if: needs.release.outputs.build == 'true'
     runs-on: macos-latest
     permissions:
       contents: write
     timeout-minutes: 30
     env:
+      TAG: ${{ needs.release.outputs.tag }}
       # Only used to decide whether to sign (docs/SIGNING.md).
       APPLE_INSTALLER_CERT_P12_BASE64: ${{ secrets.APPLE_INSTALLER_CERT_P12_BASE64 }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          # Tag pushes build that tag; manual runs build the branch they were started from.
-          ref: ${{ github.event_name == 'push' && github.ref || '' }}
+          # Pushes build the commit that was released; manual runs build the branch they were started from.
+          ref: ${{ github.event_name == 'push' && github.sha || '' }}
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
@@ -147,8 +183,10 @@ jobs:
       - name: Attach to release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "$TAG" dist/*.pkg --clobber --repo "$GITHUB_REPOSITORY"
+        run: gh release upload "$TAG" dist/*.pkg dist/*-macos.zip --clobber --repo "$GITHUB_REPOSITORY"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: macos-installer
-          path: dist/*.pkg
+          path: |
+            dist/*.pkg
+            dist/*-macos.zip

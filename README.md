@@ -136,7 +136,9 @@ npm run package                                                     # release bu
 The project is plain JavaScript (Adobe CEP panel + Node) and ExtendScript, with no framework. See
 [CONTRIBUTING.md](CONTRIBUTING.md), [docs/API.md](docs/API.md) and [docs/MCP.md](docs/MCP.md).
 Signed installers: [docs/SIGNING.md](docs/SIGNING.md). Adobe Exchange listing: [docs/ADOBE-EXCHANGE.md](docs/ADOBE-EXCHANGE.md).
-Releases are built by GitHub Actions: pushing a `v*` tag builds the Windows `.exe` and macOS `.pkg`.
+Releases are built by GitHub Actions: bumping the version in `package.json` on `main` tags and releases
+it, building the Windows `.exe`, macOS `.pkg` and macOS zip. Pushing a `v*` tag does the same. The signed
+`.zxp` and Windows zip need the local signing certificate, so upload them from `npm run package`.
 
 ```
 index.html, css/, js/   Panel UI (Adobe CEP: Chromium + Node.js)
